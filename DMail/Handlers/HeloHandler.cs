@@ -95,7 +95,9 @@ namespace DMail.Handlers
                                 }
                                 Mail.Append(text).Append("\r\n");
                             }
-                            await WriteLine("250 OK");
+                            var mailHandler = new FileMailHandler();
+                            var result = await mailHandler.HandleMail(ReversePath.ToString(), ForwardPath.ToString(), Mail.ToString());
+                            await WriteLine(result);
                             break;
                         }
 
